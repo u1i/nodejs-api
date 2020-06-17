@@ -1,4 +1,4 @@
-# nodejs-test
+# Currency Exhange API – NodeJS
 
 docker run -d -p 8080:3000 u1ih/nodejs-test
 
