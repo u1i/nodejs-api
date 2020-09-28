@@ -1,11 +1,11 @@
 var express = require("express");
 var app = express();
 app.listen(8080, () => {
- console.log("Server running on port 3000");
+ console.log("Server running on port 3001");
 });
 
 app.get("/", (req, res) => {
- res.send(["Hello!"]);
+ res.send(["Hello and welcome to the old world!"]);
 });
 
 app.get("/api", (req, res, next) => {
