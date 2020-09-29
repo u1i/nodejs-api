@@ -13,7 +13,8 @@ app.get("/api", (req, res, next) => {
 });
 
 app.get("/fx-static", (req, res, next) => {
- res.json({"sell": "489.181", "timestamp": "2020-06-17 14:42:34.492974", "buy": "389.1"});
+ //res.json({"sell": "489.181", "timestamp": "2020-06-17 14:42:34.492974", "buy": "389.1"});
+ res.json({"sell": "489.8", "timestamp": "2020-06-17 14:42:34.492974", "buy": "389.9"});
 });
 
 app.get("/fx", (req, res, next) => {
