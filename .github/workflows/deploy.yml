@@ -22,8 +22,8 @@ jobs:
         
         echo "GCP_APPLICATION $a"
         #echo "GCP_CREDENTIALS $c"
-        echo "GCP_EMAIL ${e}"
-        echo "GCP_PROJECT ${p}"
+        echo "GCP_EMAIL $e"
+        echo "GCP_PROJECT $p"
     
     - name: Checkout
       uses: actions/checkout@master
