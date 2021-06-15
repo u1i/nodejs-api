@@ -14,4 +14,4 @@ In order for this to be provisioned on your Google Cloud instance, you need to m
 * GCP_EMAIL
 * GCP_PROJECT
 
-You'll also need to activate Google Container Registry
+You'll also need to activate a couple of APIs in Google Cloud, the first deployment will probably fail and point you into the right direction.
