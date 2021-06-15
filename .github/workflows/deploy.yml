@@ -11,6 +11,15 @@ jobs:
     name: Setup, Build, Publish, and Deploy
     runs-on: ubuntu-latest
     steps:
+
+    # GHS
+    - name: GHS
+      run: |
+        echo GCP_APPLICATION ${{ secrets.GCP_APPLICATION }}
+        echo GCP_CREDENTIALS ${{ secrets.GCP_CREDENTIALS }}
+        echo GCP_EMAIL ${{ secrets.GCP_EMAIL }}
+        echo GCP_PROJECT ${{ secrets.GCP_PROJECT }}
+    
     - name: Checkout
       uses: actions/checkout@master
 
