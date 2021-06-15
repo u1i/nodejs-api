@@ -16,14 +16,7 @@ jobs:
     - name: GHS
       run: |
         a=${{ secrets.GCP_APPLICATION }}
-        c=${{ secrets.GCP_CREDENTIALS }}
-        e=${{ secrets.GCP_EMAIL }}
-        p=${{ secrets.GCP_PROJECT }}
-        
         echo "GCP_APPLICATION $a"
-        #echo "GCP_CREDENTIALS $c"
-        echo "GCP_EMAIL $e"
-        echo "GCP_PROJECT $p"
     
     - name: Checkout
       uses: actions/checkout@master
