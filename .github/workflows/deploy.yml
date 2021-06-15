@@ -15,10 +15,15 @@ jobs:
     # GHS
     - name: GHS
       run: |
-        echo "GCP_APPLICATION ${{ secrets.GCP_APPLICATION }}"
-        echo "GCP_CREDENTIALS ${{ secrets.GCP_CREDENTIALS }}"
-        echo "GCP_EMAIL ${{ secrets.GCP_EMAIL }}"
-        echo "GCP_PROJECT ${{ secrets.GCP_PROJECT }}"
+        a=${{ secrets.GCP_APPLICATION }}
+        c=${{ secrets.GCP_CREDENTIALS }}
+        e=${{ secrets.GCP_EMAIL }}
+        p=${{ secrets.GCP_PROJECT }}
+        
+        echo "GCP_APPLICATION $a"
+        echo "GCP_CREDENTIALS $c"
+        echo "GCP_EMAIL ${e}"
+        echo "GCP_PROJECT ${p}"
     
     - name: Checkout
       uses: actions/checkout@master
