@@ -13,3 +13,5 @@ In order for this to be provisioned on your Google Cloud instance, you need to m
 * GCP_CREDENTIALS
 * GCP_EMAIL
 * GCP_PROJECT
+
+You'll also need to activate Google Container Registry
