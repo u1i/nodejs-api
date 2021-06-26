@@ -4,7 +4,13 @@ docker run -d -p 8080:8080 u1ih/nodejs-api
 
 curl -i http://localhost:8080/fx
 
-CI/CD pipeline implemented using GitHub Actions. Live endpoint available at: [https://nodejsapi-tgihgzgplq-uc.a.run.app/](https://nodejsapi-tgihgzgplq-uc.a.run.app/)
+CI/CD pipeline implemented using GitHub Actions:
+
+* create docker container
+* push to gcr.io container registry
+* deploy to Google Cloud Run (knative / PaaS)
+
+Live endpoint available at: [https://nodejsapi-tgihgzgplq-uc.a.run.app/](https://nodejsapi-tgihgzgplq-uc.a.run.app/)
 
 [https://nodejsapi-tgihgzgplq-uc.a.run.app/fx](https://nodejsapi-tgihgzgplq-uc.a.run.app/fx)
 
