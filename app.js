@@ -5,7 +5,7 @@ app.listen(8080, () => {
 });
 
 app.get("/", (req, res) => {
- res.send(["Hello! This is version 0.17"]);
+ res.send(["Hello! This is version 0.18"]);
 });
 
 app.get("/api", (req, res, next) => {
@@ -25,7 +25,7 @@ app.get("/fx", (req, res, next) => {
  var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
  var dateTime = date+' '+time;
 
- res.json({"sell": "1487." + rand1, "timestamp": dateTime, "buy": "1387." + rand2});
+ res.json({"sell": "1587." + rand1, "timestamp": dateTime, "buy": "1487." + rand2});
 });
 
 app.get("/random", (req, res, next) => {
