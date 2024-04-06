@@ -15,10 +15,15 @@ jobs:
     - name: Checkout
       uses: actions/checkout@master
 
-    # Setup gcloud CLI
-    - uses: google-github-actions/setup-gcloud@v0
+    - name: Authenticate
+      uses: 'google-github-actions/auth@v2'
       with:
-        service_account_email: ${{ secrets.GCP_EMAIL }}
+        credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
+
+    - name: Set up Cloud SDK
+      uses: google-github-actions/setup-gcloud@v2
+      with:
+        project_id: ${{ secrets.GCP_PROJECT }}
         service_account_key: ${{ secrets.GCP_CREDENTIALS }}
         export_default_credentials: true
 
@@ -27,17 +32,14 @@ jobs:
       run: |
         gcloud auth configure-docker
 
-    # Build the Docker image
-    - name: Build & Publish
+    - name: Build container image
       run: |
-        gcloud config set project ${{ secrets.GCP_PROJECT }}
-        gcloud builds submit --tag gcr.io/${{ secrets.GCP_PROJECT }}/${{ secrets.GCP_APPLICATION }}
-        gcloud config set run/region us-central1
+        docker build -t gcr.io/${{ secrets.GCP_PROJECT }}/${{ secrets.GCP_APPLICATION }}:latest .
 
-    # Deploy the Docker image to the GKE cluster
-    - name: Deploy
+    - name: Push to Artifact Registry
       run: |
-        gcloud run deploy ${{ secrets.GCP_APPLICATION }} --image gcr.io/${{ secrets.GCP_PROJECT }}/${{ secrets.GCP_APPLICATION }} \
-        --platform managed \
-        --allow-unauthenticated \
-        --memory 256M
+        docker push gcr.io/${{ secrets.GCP_PROJECT }}/${{ secrets.GCP_APPLICATION }}:latest
+
+    - name: Deploy to Cloud Run
+      run: |
+        gcloud run deploy --image gcr.io/${{ secrets.GCP_PROJECT }}/${{ secrets.GCP_APPLICATION }}:latest --platform managed --region us-central1 --allow-unauthenticated ${{ secrets.GCP_APPLICATION }}
