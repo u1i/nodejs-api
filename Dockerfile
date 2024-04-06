@@ -17,3 +17,4 @@ USER user
 WORKDIR /home/user
 
 CMD ["sh","/home/user/start.sh"]
+
