@@ -5,39 +5,37 @@ on:
     branches: [ master ]
   pull_request:
     branches: [ master ]
-    
+
 jobs:
   setup-build-publish-deploy:
     name: Setup, Build, Publish, and Deploy
     runs-on: ubuntu-latest
     steps:
-    
+
     - name: Checkout
       uses: actions/checkout@master
 
     # Setup gcloud CLI
-    - uses: google-github-actions/setup-gcloud@v0
+    - id: 'auth'
+      uses: 'google-github-actions/auth@v2'
       with:
-        service_account_email: ${{ secrets.GCP_EMAIL }}
-        service_account_key: ${{ secrets.GCP_CREDENTIALS }}
-        export_default_credentials: true
+        credentials_json: ${{ secrets.GCP_JSON }}
 
-    # Configure Docker with Credentials
-    - name: Configure Docker
-      run: |
-        gcloud auth configure-docker
+    - name: 'Set up Cloud SDK'
+      uses: 'google-github-actions/setup-gcloud@v2'
+      with:
+        version: '>= 363.0.0'
 
     # Build the Docker image
     - name: Build & Publish
       run: |
-        gcloud config set project ${{ secrets.GCP_PROJECT }}
-        gcloud builds submit --tag gcr.io/${{ secrets.GCP_PROJECT }}/${{ secrets.GCP_APPLICATION }}
         gcloud config set run/region us-central1
+        gcloud builds submit --tag gcr.io/${GCP_PROJECT}/${{ secrets.GCP_APPLICATION }}
 
     # Deploy the Docker image to the GKE cluster
     - name: Deploy
       run: |
-        gcloud run deploy ${{ secrets.GCP_APPLICATION }} --image gcr.io/${{ secrets.GCP_PROJECT }}/${{ secrets.GCP_APPLICATION }} \
+        gcloud run deploy ${{ secrets.GCP_APPLICATION }} --image gcr.io/${GCP_PROJECT}/${{ secrets.GCP_APPLICATION }} \
         --platform managed \
         --allow-unauthenticated \
         --memory 256M
