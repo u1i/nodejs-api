@@ -12,32 +12,32 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-      - name: Checkout
-        uses: actions/checkout@master
+    - name: Checkout
+      uses: actions/checkout@master
 
-      # Setup gcloud CLI
-      - uses: google-github-actions/setup-gcloud@v0
-        with:
-          service_account_email: ${{ secrets.GCP_EMAIL }}
-          service_account_key: ${{ secrets.GCP_CREDENTIALS }}
-          export_default_credentials: true
+    # Setup gcloud CLI
+    - uses: google-github-actions/setup-gcloud@v0
+      with:
+        service_account_email: ${{ secrets.GCP_EMAIL }}
+        service_account_key: ${{ secrets.GCP_CREDENTIALS }}
+        export_default_credentials: true
 
-      # Configure Docker with Credentials
-      - name: Configure Docker
-        run: |
-          gcloud auth configure-docker
+    # Configure Docker with Credentials
+    - name: Configure Docker
+      run: |
+        gcloud auth configure-docker
 
-      # Build the Docker image
-      - name: Build & Publish
-        run: |
-          gcloud config set project ${{ secrets.GCP_PROJECT }}
-          gcloud builds submit --region=us-central1 --tag us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT }}/${{ secrets.GCP_APPLICATION }}/${{ secrets.GCP_APPLICATION }}
-          gcloud config set run/region us-central1
+    # Build the Docker image
+    - name: Build & Publish
+      run: |
+        gcloud config set project ${{ secrets.GCP_PROJECT }}
+        gcloud builds submit --region=us-central1 --tag us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT }}/${{ secrets.GCP_APPLICATION }}/${{ secrets.GCP_APPLICATION }}
+        gcloud config set run/region us-central1
 
-      # Deploy the Docker image to the GKE cluster
-      - name: Deploy
-        run: |
-          gcloud run deploy ${{ secrets.GCP_APPLICATION }} --image us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT }}/${{ secrets.GCP_APPLICATION }}/${{ secrets.GCP_APPLICATION }} \
-          --platform managed \
-          --allow-unauthenticated \
-          --memory 256M
+    # Deploy the Docker image to the GKE cluster
+    - name: Deploy
+      run: |
+        gcloud run deploy ${{ secrets.GCP_APPLICATION }} --image us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT }}/${{ secrets.GCP_APPLICATION }}/${{ secrets.GCP_APPLICATION }} \
+        --platform managed \
+        --allow-unauthenticated \
+        --memory 256M
