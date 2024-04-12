@@ -16,12 +16,20 @@ jobs:
     - name: Checkout
       uses: actions/checkout@master
 
-    # Setup gcloud CLI
-    - uses: google-github-actions/setup-gcloud@v0
+    - id: 'auth'
+      uses: 'google-github-actions/auth@v2'
       with:
-        service_account_email: ${{ secrets.GCP_EMAIL }}
-        service_account_key: ${{ secrets.GCP_CREDENTIALS }}
-        export_default_credentials: true
+        credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
+
+    - name: 'Set up Cloud SDK'
+      uses: 'google-github-actions/setup-gcloud@v2'
+
+    # Setup gcloud CLI
+    # - uses: google-github-actions/setup-gcloud@v2
+    #   with:
+    #     service_account_email: ${{ secrets.GCP_EMAIL }}
+    #     service_account_key: ${{ secrets.GCP_CREDENTIALS }}
+    #     export_default_credentials: true
 
     # Configure Docker with Credentials
     - name: Configure Docker
