@@ -32,6 +32,8 @@ app.get("/random", (req, res, next) => {
  res.json([Math.floor(Math.random() * 90) + 10]);
 });
 
+app.use('/site', express.static('public'));
+
 app.get('*',function (req, res) {
         res.redirect('/');
     });

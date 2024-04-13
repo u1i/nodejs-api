@@ -31,6 +31,7 @@ You'll also need to activate a couple of APIs in Google Cloud, the first deploym
 ### Web Access
 
 https://nodejsapi-hkqcqmboga-uc.a.run.app
+https://nodejsapi-hkqcqmboga-uc.a.run.app/site
 
 ### Changed GCP action to version 2
 
