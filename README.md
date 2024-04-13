@@ -28,6 +28,10 @@ You'll also need to activate a couple of APIs in Google Cloud, the first deploym
 
 ## Updates
 
+### Web Access
+
+https://nodejsapi-hkqcqmboga-uc.a.run.app
+
 ### Changed GCP action to version 2
 
 This is to fix the deprecation error on version 0 before.
